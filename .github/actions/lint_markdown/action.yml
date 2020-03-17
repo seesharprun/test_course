@@ -1,4 +1,5 @@
-name: Markdown 
+name: Markdown Lint
+description: Runs a linter on all Markdown files
 runs:
   using: docker
   image: Dockerfile
