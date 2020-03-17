@@ -1,0 +1,12 @@
+name: Continuous Integration
+on: [push]
+jobs:
+  markdown_lint:
+    name: Run Markdown Lint
+    runs-on: ubuntu-latest
+    container: node
+    steps:
+      - name: Test Node Version
+        run: node --version
+      - name: Test NPM Version
+        run: npm --version
