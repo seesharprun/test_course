@@ -1,7 +1,5 @@
 # Module 1: Module Title
 
-# Module overview
-
 ## Description
 
 Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim eniam, quis nostrum
