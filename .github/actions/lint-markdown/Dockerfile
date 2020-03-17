@@ -1,5 +1,5 @@
 FROM node:13
 
-RUN npm install --global markdownlist-cli
+RUN npm install --global markdownlint-cli
 
 ENTRYPOINT [ "markdownlint", "**/*.md"]
