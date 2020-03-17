@@ -10,9 +10,10 @@ namespace App
         {
             Console.WriteAscii("Finding Markdown Files");
             int count = 0;
-            foreach(string markdownFile in Directory.GetFiles(Directory.GetCurrentDirectory(), "*.md"))
+            var files = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.md", SearchOption.AllDirectories);
+            foreach(string file in files)
             {
-                Console.WriteLine($"[{++count}]\t{markdownFile}");
+                Console.WriteLine($"[{++count}]\t{file}");
             }
         }
     }
