@@ -4,7 +4,8 @@ jobs:
   markdown_lint:
     name: Run Markdown Lint
     runs-on: ubuntu-latest
-    container: node
+    container: 
+      image: node:13
     steps:
       - name: Test Node Version
         run: node --version
