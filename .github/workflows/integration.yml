@@ -5,4 +5,4 @@ jobs:
     name: Run Markdown Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/actions/lint_markdown
+      - uses: /.github/actions/lint_markdown
