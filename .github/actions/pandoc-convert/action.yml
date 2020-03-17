@@ -1,0 +1,8 @@
+name: Pando Convert
+description: Runs pandoc to convert all Markdown files
+runs:
+  using: docker
+  image: Dockerfile
+branding:
+  icon: settings
+  color: orange
