@@ -1,7 +1,9 @@
 FROM node:13
 
-COPY config.json .
+WORKDIR /lint
+
+COPY config.json /config.json
 
 RUN npm install --global markdownlint-cli
 
-ENTRYPOINT ["markdownlint", "**/*.md", "--config", "config.json", "--ignore", "readme.md"]
+ENTRYPOINT ["dir"]
