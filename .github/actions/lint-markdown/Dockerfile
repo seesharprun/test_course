@@ -1,7 +1,8 @@
 FROM node:13
 
-COPY config.json .
+COPY config.json /config.json
+COPY entrypoint.sh /entrypoint.sh
 
 RUN npm install --global markdownlint-cli
 
-ENTRYPOINT [ "markdownlint", "**/*.md", "--ignore", "readme.md", "--config", "config.json"]
+ENTRYPOINT ["/entrypoint.sh"]
