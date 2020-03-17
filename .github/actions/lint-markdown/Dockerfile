@@ -4,4 +4,4 @@ COPY config.json .
 
 RUN npm install --global markdownlint-cli
 
-ENTRYPOINT [ "markdownlint", "**/*.md", "--config config.json"]
+ENTRYPOINT [ "markdownlint", "**/*.md", "--ignore", "readme.md", "--config", "config.json"]
