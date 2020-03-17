@@ -1,0 +1,19 @@
+name: Continuous Integration
+on: 
+  push:
+    branches:
+      - master
+jobs:
+  markdown_lint:
+    name: Run Markdown Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/lint-markdown
+  convert_pandoc:
+    name: Convert Files using Pandoc
+    needs: markdown_lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/pandoc-convert
