@@ -5,4 +5,5 @@ jobs:
     name: Run Markdown Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/actions/lint-markdown
+      - uses: actions/checkout@v2
+      - uses: actions/lint-markdown
