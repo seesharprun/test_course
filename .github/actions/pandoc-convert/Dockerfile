@@ -8,6 +8,6 @@ RUN apt-get install --assume-yes pandoc
 
 COPY . ./
 
-RUN dotnet publish --configuration Release --output out
+RUN dotnet publish --configuration Release --output /app/out
 
 ENTRYPOINT [ "dotnet", "/app/out/app.dll" ]
