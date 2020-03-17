@@ -1,6 +1,6 @@
 FROM node:13-slim
 
-COPY config.json ./
+COPY config.json ./config.json
 
 RUN npm install --global markdownlint-cli
 
