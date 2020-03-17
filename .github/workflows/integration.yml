@@ -1,13 +1,8 @@
 name: Continuous Integration
-on: [push]
+on: push
 jobs:
   markdown_lint:
     name: Run Markdown Lint
     runs-on: ubuntu-latest
-    container: 
-      image: node:13
     steps:
-      - name: Test Node Version
-        run: node --version
-      - name: Test NPM Version
-        run: npm --version
+      - uses: ./.github/actions/lint_markdown
