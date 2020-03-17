@@ -10,4 +10,4 @@ COPY . ./
 
 RUN dotnet publish --configuration Release --output out
 
-ENTRYPOINT [ "dotnet", "out/app.dll" ]
+ENTRYPOINT [ "dotnet", "/app/out/app.dll" ]
