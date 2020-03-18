@@ -17,4 +17,6 @@ exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
 
 ![Figure: Computer with a developer tool open.](/media/computer.png)
 
+**Header**
+
 Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur.
