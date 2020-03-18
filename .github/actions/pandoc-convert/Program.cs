@@ -125,7 +125,7 @@ internal class Processor
         var info = new ProcessStartInfo
         {
             FileName = "pandoc",
-            Arguments = $"{source} --from markdown --to docx --reference-doc={Template} --output \"{dest}\""
+            Arguments = $"{source} --from markdown --to docx --reference-doc={Template} --output \"/pkg/{dest}\""
         };
         Process.Start(info).WaitForExit();
     }
