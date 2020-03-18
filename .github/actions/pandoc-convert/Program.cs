@@ -14,7 +14,7 @@ public class Program
     static void Main(string[] args) =>
         Arguments.Default.ParseArguments<Options>(args)
             .MapResult(options => {
-                new Processor(_courseNumber, _courseTitle);
+                new Processor(_courseNumber, _courseTitle, options.Template);
                 return 0;
             }, _ => 1);
 }
@@ -29,12 +29,14 @@ internal class Processor
 {
     public string Number { get; }
     public string Title { get; }
+    public string Template { get; }
     public TextInfo TextInfo { get; }
 
-    public Processor(string number, string title)
+    public Processor(string number, string title, string template)
     {
         Number = number;
         Title = title;
+        Template = template;
         TextInfo = new CultureInfo("en-US", false).TextInfo;
         FindMarkdownFiles();
     }
@@ -123,7 +125,7 @@ internal class Processor
         var info = new ProcessStartInfo
         {
             FileName = "pandoc",
-            Arguments = $"{source} --from markdown --to docx --reference-doc=template.docx --output \"{dest}\""
+            Arguments = $"{source} --from markdown --to docx --reference-doc={Template} --output \"{dest}\""
         };
         Process.Start(info).WaitForExit();
     }
