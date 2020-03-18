@@ -51,12 +51,19 @@ internal class Processor
         {
             Console.WriteLine($"[{++count}]\t{file}");
         }
-
-        CreateTempDirectory(root);
+        CreatePackageDirectory();
+        GetModules(CreateTempDirectory());
     }
 
-    private void CreateTempDirectory(string sourcePath)
+    private void CreatePackageDirectory()
     {
+        string pkgPath = Path.Combine(Directory.GetCurrentDirectory(), "pkg");
+        Directory.CreateDirectory(pkgPath);
+    }
+
+    private string CreateTempDirectory()
+    {
+        string sourcePath = Path.Combine(Directory.GetCurrentDirectory(), "src");
         string tempPath = sourcePath.Replace("src", "tmp");
         var info = new ProcessStartInfo
         {
@@ -64,7 +71,7 @@ internal class Processor
             Arguments = $"-R {sourcePath} {tempPath}"
         };
         Process.Start(info).WaitForExit();
-        GetModules(tempPath);
+        return tempPath;
     }
 
     private void GetModules(string coursePath)
@@ -124,8 +131,9 @@ internal class Processor
         ProcessFileContent(source);
         var info = new ProcessStartInfo
         {
-            FileName = "pandoc",
-            Arguments = $"{source} --from markdown --to docx --reference-doc={Template} --output \"/pkg/{dest}\""
+            FileName = "pandoc", 
+            WorkingDirectory = Path.Combine(Directory.GetCurrentDirectory(), "pkg"),         
+            Arguments = $"{source} --from markdown --to docx --reference-doc={Template} --output \"{dest}\""
         };
         Process.Start(info).WaitForExit();
     }
