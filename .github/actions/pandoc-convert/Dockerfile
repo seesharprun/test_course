@@ -4,7 +4,7 @@ WORKDIR /app
 
 RUN apt-get update
 
-RUN apt-get install --assume-yes pandoc
+RUN apt-get install --assume-yes pandoc tree
 
 COPY . ./
 
