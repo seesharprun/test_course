@@ -3,12 +3,43 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
+using CommandLine;
+using Arguments = CommandLine.Parser;
+
 public class Program
 {
     private static readonly string _courseNumber = "40575A";
     private static readonly string _courseTitle = "Power Platform Fundamentals";
 
-    static void Main(string[] args)
+    static void Main(string[] args) =>
+        Arguments.Default.ParseArguments<Options>(args)
+            .MapResult(options => {
+                new Processor(_courseNumber, _courseTitle);
+                return 0;
+            }, _ => 1);
+}
+
+internal class Options
+{
+    [Option('t', "template", Required = false, Default = "template.docx", HelpText = "Template to use in conversion")]
+    public string Template { get; set; }
+}
+
+internal class Processor
+{
+    public string Number { get; }
+    public string Title { get; }
+    public TextInfo TextInfo { get; }
+
+    public Processor(string number, string title)
+    {
+        Number = number;
+        Title = title;
+        TextInfo = new CultureInfo("en-US", false).TextInfo;
+        FindMarkdownFiles();
+    }
+
+    private void FindMarkdownFiles()
     {
         Console.WriteLine("Finding Markdown Files");
         string root = Path.Combine(Directory.GetCurrentDirectory(), "src");
@@ -18,22 +49,7 @@ public class Program
         {
             Console.WriteLine($"[{++count}]\t{file}");
         }
-        new Processor(_courseNumber, _courseTitle, root);
-    }
-}
 
-internal class Processor
-{
-    public string Number { get; }
-    public string Title { get; }
-    public string Root { get; }
-    public TextInfo TextInfo { get; }
-
-    public Processor(string number, string title, string root)
-    {
-        Number = number;
-        Title = title;
-        TextInfo = new CultureInfo("en-US", false).TextInfo;
         CreateTempDirectory(root);
     }
 
