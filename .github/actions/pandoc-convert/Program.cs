@@ -55,15 +55,9 @@ internal class Processor
         GetModules(CreateTempDirectory());
         var info = new ProcessStartInfo
         {
-            FileName = "dir"
+            FileName = "tree"
         };
         Process.Start(info).WaitForExit();
-        var info2 = new ProcessStartInfo
-        {
-            FileName = "dir",
-            WorkingDirectory = Path.Combine(Directory.GetCurrentDirectory(), "media")
-        };
-        Process.Start(info2).WaitForExit();
     }
 
     private void CreatePackageDirectory()
