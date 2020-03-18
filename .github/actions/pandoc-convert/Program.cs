@@ -142,7 +142,7 @@ internal class Processor
     {
         string content = File.ReadAllText(source);
 
-        content = Regex.Replace(content, "\\]\\(/media", $"]({Path.Combine(Root, "media")}");
+        content = Regex.Replace(content, "\\]\\(/media", $"]({Path.Combine(Directory.GetCurrentDirectory(), "media")}");
         content = Regex.Replace(content, "icons\\/(.*)\\.png\\)", "icons/$1@3x.png){ height=\"0.4inch\" }");
 
         File.WriteAllText(
