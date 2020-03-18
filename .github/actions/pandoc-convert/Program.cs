@@ -42,8 +42,8 @@ internal class Processor
         string tempPath = sourcePath.Replace("src", "tmp");
         var info = new ProcessStartInfo
         {
-            FileName = "xcopy",
-            Arguments = $"{sourcePath} {tempPath} /f /i /e "
+            FileName = "cp",
+            Arguments = $"-R {sourcePath} {tempPath}"
         };
         Process.Start(info).WaitForExit();
         GetModules(tempPath);
