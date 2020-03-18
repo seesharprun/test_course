@@ -25,4 +25,4 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: documents
-          path: /app/pkg/
+          path: pkg/
