@@ -21,7 +21,6 @@ jobs:
         uses: actions/checkout@v2
       - name: Convert Markdown to DOCX
         uses: ./.github/actions/pandoc-convert
-      - run: tree
       - name: Archive document artifacts
         uses: actions/upload-artifact@v1
         with:
