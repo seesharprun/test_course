@@ -39,8 +39,8 @@ jobs:
         uses: actions/create-release@v1
         id: create_release
         with:
-          tag_name: ${{ github.sha }}
-          release_name: Release ${{ github.sha }}
+          tag_name: ${{ github.runId }}
+          release_name: Release ${{ github.runId }}
       - uses: actions/download-artifact@v1
         with:
           name: documents
