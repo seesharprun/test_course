@@ -53,11 +53,6 @@ internal class Processor
         }
         CreatePackageDirectory();
         GetModules(CreateTempDirectory());
-        var info = new ProcessStartInfo
-        {
-            FileName = "tree"
-        };
-        Process.Start(info).WaitForExit();
     }
 
     private void CreatePackageDirectory()
