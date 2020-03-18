@@ -9,7 +9,7 @@ Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidu
 | Lorem Ipsum. | 0.0.0: Lorem Ipsum. |
 | Lorem Ipsum. | 0.0.0: Lorem Ipsum. |
 
-Table: Topic objectives with mapping to PL-900 exam objectives
+> Table: Topic objectives with mapping to PL-900 exam objectives
 
 ## Preparation
 

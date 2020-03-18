@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -33,7 +34,19 @@ internal class Processor
         Number = number;
         Title = title;
         TextInfo = new CultureInfo("en-US", false).TextInfo;
-        GetModules(root);
+        CreateTempDirectory(root);
+    }
+
+    private void CreateTempDirectory(string sourcePath)
+    {
+        string tempPath = sourcePath.Replace("src", "tmp");
+        var info = new ProcessStartInfo
+        {
+            FileName = "xcopy",
+            Arguments = $"{sourcePath} {tempPath} /f /i /e "
+        };
+        Process.Start(info).WaitForExit();
+        GetModules(tempPath);
     }
 
     private void GetModules(string coursePath)
@@ -89,7 +102,26 @@ internal class Processor
     }
 
     private void ConvertToMarkdown(string source, string dest)
-    {
+    {     
+        ProcessFileContent(source);
+        var info = new ProcessStartInfo
+        {
+            FileName = "pandoc",
+            Arguments = $"{source} --from markdown --to docx --reference-doc=template.docx --output \"{dest}\""
+        };
+        Process.Start(info).WaitForExit();
+    }
 
+    private void ProcessFileContent(string source)
+    {
+        string content = File.ReadAllText(source);
+
+        content = Regex.Replace(content, "\\]\\(/media/", "](media/");
+        content = Regex.Replace(content, "icons\\/(.*)\\.png\\)", "icons/$1@3x.png){ height=\"0.4inch\" }");
+
+        File.WriteAllText(
+            source, 
+            content
+        );
     }
 }
