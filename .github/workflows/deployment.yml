@@ -44,8 +44,18 @@ jobs:
       - uses: actions/download-artifact@v1
         with:
           name: documents
+          path: ./assets
+      - run: dir
+      - name: Archive Release
+        uses: thedoctor0/zip-release@master
+        with:
+          filename: documents.zip
+          path: ./assets
+      - run: dir
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: documents/**/*.docx
+          asset_path: ./assets/documents.zip
+          asset_name: documents.zip
+          asset_content_type: application/zip
