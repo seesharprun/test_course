@@ -53,6 +53,17 @@ internal class Processor
         }
         CreatePackageDirectory();
         GetModules(CreateTempDirectory());
+        var info = new ProcessStartInfo
+        {
+            FileName = "dir"
+        };
+        Process.Start(info).WaitForExit();
+        var info2 = new ProcessStartInfo
+        {
+            FileName = "dir",
+            WorkingDirectory = Path.Combine(Directory.GetCurrentDirectory(), "media")
+        };
+        Process.Start(info2).WaitForExit();
     }
 
     private void CreatePackageDirectory()
@@ -142,7 +153,7 @@ internal class Processor
     {
         string content = File.ReadAllText(source);
 
-        content = Regex.Replace(content, "\\]\\(/media/", "](media/");
+        //content = Regex.Replace(content, "\\]\\(/media/", "](media/");
         content = Regex.Replace(content, "icons\\/(.*)\\.png\\)", "icons/$1@3x.png){ height=\"0.4inch\" }");
 
         File.WriteAllText(
