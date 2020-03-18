@@ -10,4 +10,4 @@ COPY . ./
 
 RUN dotnet publish --configuration Release --output /app/out
 
-ENTRYPOINT [ "dotnet", "/app/out/app.dll", "--template", "/app/template.docx" ]
+ENTRYPOINT [ "dotnet", "/app/out/app.dll", "--root", "/app/" ]

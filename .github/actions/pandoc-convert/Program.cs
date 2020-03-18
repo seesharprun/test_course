@@ -14,29 +14,29 @@ public class Program
     static void Main(string[] args) =>
         Arguments.Default.ParseArguments<Options>(args)
             .MapResult(options => {
-                new Processor(_courseNumber, _courseTitle, options.Template);
+                new Processor(_courseNumber, _courseTitle, options.Root);
                 return 0;
             }, _ => 1);
 }
 
 internal class Options
 {
-    [Option('t', "template", Required = false, Default = "template.docx", HelpText = "Template to use in conversion")]
-    public string Template { get; set; }
+    [Option('r', "root", Required = false, HelpText = "Root folder for content")]
+    public string Root { get; set; }
 }
 
 internal class Processor
 {
     public string Number { get; }
     public string Title { get; }
-    public string Template { get; }
+    public string Root { get; }
     public TextInfo TextInfo { get; }
 
-    public Processor(string number, string title, string template)
+    public Processor(string number, string title, string root)
     {
         Number = number;
         Title = title;
-        Template = template;
+        Root = root;
         TextInfo = new CultureInfo("en-US", false).TextInfo;
         FindMarkdownFiles();
     }
@@ -144,7 +144,7 @@ internal class Processor
         {
             FileName = "pandoc", 
             WorkingDirectory = Path.Combine(Directory.GetCurrentDirectory(), "pkg"),         
-            Arguments = $"{source} --from markdown --to docx --reference-doc={Template} --output \"{dest}\""
+            Arguments = $"{source} --from markdown --to docx --reference-doc={Path.Combine(Root, "template.docx")} --output \"{dest}\""
         };
         Process.Start(info).WaitForExit();
     }
@@ -153,7 +153,7 @@ internal class Processor
     {
         string content = File.ReadAllText(source);
 
-        //content = Regex.Replace(content, "\\]\\(/media/", "](media/");
+        content = Regex.Replace(content, "\\]\\(/media", $"]({Path.Combine(Root, "media")}");
         content = Regex.Replace(content, "icons\\/(.*)\\.png\\)", "icons/$1@3x.png){ height=\"0.4inch\" }");
 
         File.WriteAllText(
