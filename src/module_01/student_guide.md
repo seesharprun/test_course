@@ -5,7 +5,7 @@
 Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim eniam, quis nostrum
 exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur.
 
-| Lesson | Learning objective | PL-900 exam objectives |
+| Lesson | Learning objective | Exam objectives |
 | --- | --- | --- |
 | Lesson 1: Lesson title | Lorem ipsum. | Lorem ipsum. Lorem ipsum. |
 
